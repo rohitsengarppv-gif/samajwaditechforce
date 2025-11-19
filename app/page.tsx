@@ -1,65 +1,172 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useMemo, useState } from "react";
+
+const MAINTENANCE_WINDOW_MS = 2 * 60 * 60 * 1000; // 2 hours
+const BULLETS = [
+  "Creating New Things",
+  "Updating user experience",
+  "Adding new features",
+];
+
+type ThemeMode = "light" | "dark";
+
+function getTargetTime() {
+  return Date.now() + MAINTENANCE_WINDOW_MS;
+}
+
+function getRemaining(target: number) {
+  const diff = Math.max(target - Date.now(), 0);
+  const totalSeconds = Math.floor(diff / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return { diff, hours, minutes, seconds };
+}
+
+export default function MaintenancePage() {
+  const [theme, setTheme] = useState<ThemeMode>("light");
+  const [target] = useState(() => getTargetTime());
+  const [remaining, setRemaining] = useState(() => getRemaining(target));
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("theme");
+    if (stored === "dark" || stored === "light") {
+      setTheme(stored);
+      document.documentElement.setAttribute("data-theme", stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setRemaining(getRemaining(target));
+    }, 1000);
+    return () => window.clearInterval(interval);
+  }, [target]);
+
+  const countdownLabel = useMemo(() => {
+    const pad = (value: number) => String(value).padStart(2, "0");
+    return `${pad(remaining.hours)}:${pad(remaining.minutes)}:${pad(
+      remaining.seconds
+    )}`;
+  }, [remaining]);
+
+  const progressPercent = useMemo(() => {
+    const elapsed = MAINTENANCE_WINDOW_MS - remaining.diff;
+    const percent = Math.min(Math.max((elapsed / MAINTENANCE_WINDOW_MS) * 100, 0), 100);
+    return Number.isNaN(percent) ? 0 : percent;
+  }, [remaining.diff]);
+
+  const handleToggleTheme = () => {
+    const nextTheme: ThemeMode = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    window.localStorage.setItem("theme", nextTheme);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="maintenance-page">
+      <div className="gradient-blob gradient-blob-1" />
+      <div className="gradient-blob gradient-blob-2" />
+      <div className="gradient-blob gradient-blob-3" />
+
+      <header className="maintenance-header">
+        <div className="logo-mark" aria-label="NovaCloud logo">
+          <span className="logo-orb" />
+          <span className="logo-text">Samajwaditechforce</span>
+        </div>
+        <button type="button" className="theme-toggle" onClick={handleToggleTheme}>
+          <span className="toggle-icon" role="img" aria-label="Theme icon">
+            {theme === "dark" ? "🌙" : "☀️"}
+          </span>
+          <span className="toggle-label">{theme === "dark" ? "Dark" : "Light"} mode</span>
+        </button>
+      </header>
+
+      <main className="maintenance-shell">
+        <section className="maintenance-hero">
+          <span className="status-pill">
+            <span className="status-dot" /> Maintenance in progress
+          </span>
+          <h1>We&apos;re Making Things Better!</h1>
+          <p className="hero-lead">
+            Hold tight! We&apos;re currently performing scheduled maintenance to improve your
+            experience. We&apos;ll be back shortly. Thank you for your patience.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <p className="hero-secondary">
+            We&apos;re working behind the scenes to boost performance, polish the UI, and roll out
+            fresh capabilities.
+          </p>
+          <ul className="hero-list">
+            {BULLETS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+         
+          <p className="hero-thanks">Thanks for your support and patience 🙌</p>
+        </section>
+
+        <section className="maintenance-panel" aria-label="Maintenance live status">
+          <div className="panel-visual">
+            <div className="visual-laptop">
+              <div className="laptop-screen">
+                <div className="screen-line screen-line-1" />
+                <div className="screen-line screen-line-2" />
+                <div className="screen-line screen-line-3" />
+              </div>
+              <div className="laptop-base" />
+              <div className="gear gear-lg" />
+              <div className="gear gear-sm" />
+              <div className="tool-wrench" />
+              <div className="particle particle-1" />
+              <div className="particle particle-2" />
+              <div className="particle particle-3" />
+            </div>
+          </div>
+
+          <div className="status-card">
+            <div className="status-card-header">
+              <div>
+                <p className="status-title">Scheduled maintenance</p>
+                <p className="status-subtitle">Your workspace is safe</p>
+              </div>
+              <span className="status-badge">Live update</span>
+            </div>
+            <div className="countdown-block">
+              <span className="countdown-label">Estimated time remaining</span>
+             
+            </div>
+            <div className="progress-track">
+              <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
+            </div>
+            <div className="status-footer">
+              <div>
+                <p className="status-footnote">We&apos;re upgrading servers and rolling out tools.</p>
+                
+              </div>
+             
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="maintenance-footer">
+        <div>
+          © {new Date().getFullYear()} Samajwaditechforce ·
+        
+        </div>
+        <div className="footer-socials">
+          <a href="#" aria-label="X" className="footer-icon">
+            X
+          </a>
+          <a href="#" aria-label="LinkedIn" className="footer-icon">
+            in
+          </a>
+          <a href="#" aria-label="GitHub" className="footer-icon">
+            GH
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
