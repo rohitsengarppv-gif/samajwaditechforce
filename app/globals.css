@@ -126,8 +126,8 @@ body {
 .logo-mark {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0.85rem;
+ 
+  padding: 4px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.75);
@@ -140,9 +140,9 @@ body {
 }
 
 .logo-orb {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
+  width: 60px;
+  height: 60px;
+  border-radius: 99px;
   background: conic-gradient(from 180deg, #6366f1, #ec4899, #22d3ee, #6366f1);
   box-shadow:
       0 0 0 2px rgba(255, 255, 255, 0.7),
@@ -157,7 +157,7 @@ body {
 }
 
 .logo-image {
-  height: 36px;
+  height: 92px;
   width: auto;
   border-radius: 999px;
   object-fit: cover;
