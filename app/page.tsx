@@ -66,14 +66,16 @@ export default function MaintenancePage() {
 
   return (
     <div className="maintenance-page">
-      <div className="gradient-blob gradient-blob-1" />
-      <div className="gradient-blob gradient-blob-2" />
-      <div className="gradient-blob gradient-blob-3" />
+     
 
       <header className="maintenance-header">
-        <div className="logo-mark" aria-label="NovaCloud logo">
-          <span className="logo-orb" />
-          <span className="logo-text">Samajwaditechforce</span>
+        <div className="logo-mark" aria-label="Samajwaditechforce logo">
+          <span />
+          <img
+            src="https://res.cloudinary.com/dssmutzly/image/upload/v1763543757/928c21d2-4d75-46a6-9265-0531d5433c29_txhwun.png"
+            alt="Samajwaditechforce logo"
+            className="logo-image"
+          />
         </div>
         <button type="button" className="theme-toggle" onClick={handleToggleTheme}>
           <span className="toggle-icon" role="img" aria-label="Theme icon">
@@ -85,6 +87,12 @@ export default function MaintenancePage() {
 
       <main className="maintenance-shell">
         <section className="maintenance-hero">
+          <div className="hero-avatar">
+            <img
+              src="https://res.cloudinary.com/dssmutzly/image/upload/v1763543281/akhilesh-yadav-hd-png-images-thumbnail-1688183026_sdzrpc.png"
+              alt="Leader portrait"
+            />
+          </div>
           <span className="status-pill">
             <span className="status-dot" /> Maintenance in progress
           </span>
@@ -107,6 +115,29 @@ export default function MaintenancePage() {
         </section>
 
         <section className="maintenance-panel" aria-label="Maintenance live status">
+          <div className="right-highlights">
+            <p>
+             
+              <span className="right-highlight-text">
+                <strong>Youth Leadership</strong> – Akhilesh Yadav inspires youth with progressive
+                vision, modern ideas, and leadership.
+              </span>
+            </p>
+            <p>
+             
+              <span className="right-highlight-text">
+                <strong>Digital Empowerment</strong> – He promotes technology, digital growth, and
+                opportunities for young aspiring individuals.
+              </span>
+            </p>
+            <p>
+             
+              <span className="right-highlight-text">
+                <strong>Social Development</strong> – Focused on equality, innovation, and uplifting
+                communities through impactful development initiatives.
+              </span>
+            </p>
+          </div>
           <div className="panel-visual">
             <div className="visual-laptop">
               <div className="laptop-screen">
