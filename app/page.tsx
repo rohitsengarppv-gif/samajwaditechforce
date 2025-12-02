@@ -151,14 +151,30 @@ export default function MaintenancePage() {
             />
             <span className="text-xl font-bold text-red-600">Samajwadi Tech Force</span>
           </div>
-          <button
-            type="button"
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-red-100 hover:bg-red-200'} transition-colors`}
-            onClick={handleToggleTheme}
-          >
-            <span className="text-xl">{isDark ? "🌙" : "☀️"}</span>
-            <span className="text-sm font-medium">{isDark ? "Dark" : "Light"}</span>
-          </button>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex gap-6 mr-2">
+              <Link
+                href="/about"
+                className={`font-medium ${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-red-600'} transition-colors`}
+              >
+                About Us
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className={`font-medium ${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-red-600'} transition-colors`}
+              >
+                Privacy Policy
+              </Link>
+            </nav>
+            <button
+              type="button"
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-red-100 hover:bg-red-200'} transition-colors`}
+              onClick={handleToggleTheme}
+            >
+              <span className="text-xl">{isDark ? "🌙" : "☀️"}</span>
+              <span className="text-sm font-medium">{isDark ? "Dark" : "Light"}</span>
+            </button>
+          </div>
         </div>
       </header>
 
