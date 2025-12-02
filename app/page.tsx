@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const BULLETS = [
   "Creating New Things",
@@ -150,8 +151,8 @@ export default function MaintenancePage() {
             />
             <span className="text-xl font-bold text-red-600">Samajwadi Tech Force</span>
           </div>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-red-100 hover:bg-red-200'} transition-colors`}
             onClick={handleToggleTheme}
           >
@@ -175,12 +176,12 @@ export default function MaintenancePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
                 We're Making Things Better!
               </h1>
-              
+
               <p className={`text-lg sm:text-xl mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                Hold tight! We're currently performing scheduled maintenance to improve your experience. 
+                Hold tight! We're currently performing scheduled maintenance to improve your experience.
                 We'll be back shortly. Thank you for your patience.
               </p>
-              
+
               <p className={`text-base mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 We're working behind the scenes to boost performance, polish the UI, and roll out fresh capabilities.
               </p>
@@ -236,7 +237,7 @@ export default function MaintenancePage() {
             <p className={`text-center mb-12 ${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-3xl mx-auto`}>
               Akhilesh Yadav's vision for Uttar Pradesh is built on three fundamental pillars that drive progress and development
             </p>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               <div className={`${isDark ? 'bg-gray-700' : 'bg-red-50'} p-8 rounded-2xl border-l-4 border-red-600 hover:shadow-xl transition-shadow`}>
                 <div className="text-4xl mb-4">🎯</div>
@@ -245,7 +246,7 @@ export default function MaintenancePage() {
                   Akhilesh Yadav inspires youth with progressive vision, modern ideas, and dynamic leadership. Empowering the next generation to lead with innovation and courage.
                 </p>
               </div>
-              
+
               <div className={`${isDark ? 'bg-gray-700' : 'bg-red-50'} p-8 rounded-2xl border-l-4 border-red-600 hover:shadow-xl transition-shadow`}>
                 <div className="text-4xl mb-4">💻</div>
                 <h3 className="text-2xl font-bold text-red-600 mb-4">Digital Empowerment</h3>
@@ -253,7 +254,7 @@ export default function MaintenancePage() {
                   He promotes technology, digital growth, and opportunities for young aspiring individuals. Building a digitally connected and empowered Uttar Pradesh.
                 </p>
               </div>
-              
+
               <div className={`${isDark ? 'bg-gray-700' : 'bg-red-50'} p-8 rounded-2xl border-l-4 border-red-600 hover:shadow-xl transition-shadow`}>
                 <div className="text-4xl mb-4">🌱</div>
                 <h3 className="text-2xl font-bold text-red-600 mb-4">Social Development</h3>
@@ -274,10 +275,10 @@ export default function MaintenancePage() {
             <p className={`text-center mb-12 ${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-3xl mx-auto`}>
               Transforming Uttar Pradesh through technology, training, and grassroots engagement
             </p>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {INITIATIVES.map((initiative, idx) => (
-                <div 
+                <div
                   key={idx}
                   className={`bg-gradient-to-br ${initiative.color} p-8 rounded-2xl text-white hover:scale-105 transition-transform shadow-xl`}
                 >
@@ -296,32 +297,30 @@ export default function MaintenancePage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-red-600 mb-12">
               Our Movement in Action
             </h2>
-            
+
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               {GALLERY_IMAGES.map((img, idx) => (
                 <div
                   key={idx}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    idx === currentGalleryImage ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-1000 ${idx === currentGalleryImage ? 'opacity-100' : 'opacity-0'
+                    }`}
                 >
-                  <img 
-                    src={img} 
+                  <img
+                    src={img}
                     alt={`Gallery ${idx + 1}`}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
               ))}
-              
+
               <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
                 {GALLERY_IMAGES.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentGalleryImage(idx)}
-                    className={`h-2 rounded-full transition-all ${
-                      idx === currentGalleryImage ? 'w-8 bg-red-600' : 'w-2 bg-white/50'
-                    }`}
+                    className={`h-2 rounded-full transition-all ${idx === currentGalleryImage ? 'w-8 bg-red-600' : 'w-2 bg-white/50'
+                      }`}
                   />
                 ))}
               </div>
@@ -335,14 +334,13 @@ export default function MaintenancePage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-red-600 mb-12">
               Voices from the Ground
             </h2>
-            
+
             <div className="relative">
               {TESTIMONIALS.map((testimonial, idx) => (
                 <div
                   key={idx}
-                  className={`transition-opacity duration-500 ${
-                    idx === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
-                  }`}
+                  className={`transition-opacity duration-500 ${idx === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                    }`}
                 >
                   <div className={`${isDark ? 'bg-gray-800' : 'bg-white'} p-8 sm:p-12 rounded-2xl shadow-xl`}>
                     <div className="flex items-center gap-4 mb-6">
@@ -358,15 +356,14 @@ export default function MaintenancePage() {
                   </div>
                 </div>
               ))}
-              
+
               <div className="flex justify-center gap-2 mt-8">
                 {TESTIMONIALS.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentTestimonial(idx)}
-                    className={`h-2 rounded-full transition-all ${
-                      idx === currentTestimonial ? 'w-8 bg-red-600' : 'w-2 bg-red-300'
-                    }`}
+                    className={`h-2 rounded-full transition-all ${idx === currentTestimonial ? 'w-8 bg-red-600' : 'w-2 bg-red-300'
+                      }`}
                   />
                 ))}
               </div>
@@ -386,7 +383,7 @@ export default function MaintenancePage() {
                 प्रशिक्षण देकर, उन्हें संगठन से जोड़ना और डिजिटल रूप से प्रशिक्षित कर समाजवादी पार्टी
                 की ऑनलाइन एवं ग्राउंड उपस्थिति को मजबूत बनाना।
               </p>
-              
+
               <div className="grid sm:grid-cols-2 gap-6">
                 {[
                   "प्रत्येक विधानसभा से कम से कम 100 सक्रिय युवाओं को टेक फोर्स से जोड़ना।",
@@ -417,20 +414,21 @@ export default function MaintenancePage() {
             <p className="text-xl text-red-100 mb-8">
               Be part of the movement that's transforming Uttar Pradesh through technology and youth power
             </p>
-            
+
           </div>
         </section>
       </main>
 
       <footer className={`${isDark ? 'bg-gray-900 border-gray-800' : 'bg-gray-900 border-gray-800'} border-t`}>
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-12">
-         
+
           <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm">
               © {new Date().getFullYear()} Samajwaditechforce. All rights reserved.
             </div>
             <div className="flex gap-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-red-600 transition-colors">Privacy Policy</a>
+              <Link href="/about" className="hover:text-red-600 transition-colors">About Us</Link>
+              <Link href="/privacy-policy" className="hover:text-red-600 transition-colors">Privacy Policy</Link>
               <a href="#" className="hover:text-red-600 transition-colors">Terms of Service</a>
             </div>
           </div>
